@@ -1,0 +1,46 @@
+This assignment consists of 4 files:
+
+Functionalities implemented:
+Multiple pipes
+Redirection
+history
+history 'number'
+!!
+!5 (!number)
+!-6 (!-number)
+!e (!sequence)
+cd (cd path and cd ~-)
+pwd
+echo
+environment variables handling
+export
+Ctrl+C signal
+
+(1) shell.c 
+	It contains main() function which handles Signal (Ctrl+C) and printing the current working directory.
+	It also takes input from the command and passes that input to "parser.h" function parse(char* token[])
+
+(2) parser.h
+	It is used for parsing and handling number of commands entered in multiple pipes by the user.
+	Also, it takes care of Redirection inputs entered in the string given by the main() function.
+
+It consists of the following functions:
+
+char* checkForRedirections(int type_of_fd,char* this_token)
+//this function takes care of the input redirection and checks for the existence of the '< or >'.
+If these symbols exists, this function removes the input and output file name and replaces stdout, pipe(read or write) to the file (read or write).
+
+void executeProcess(int in,int out,char *thisCommand[])
+{
+	//this function executes the commands (if multiple commands) are entered using execvp() taking care of different file descriptors for 		input and output
+}
+
+
+(3) history.h
+
+	This file takes care of the various history modules (i.e. history, history 5, !!, !number, !-number, !sequence)
+
+
+(4) builtins.h
+
+	This files contains functions which takes care of the functionalities (cd, export, echo)
